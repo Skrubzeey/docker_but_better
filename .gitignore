@@ -249,8 +249,8 @@ config.local.*
 settings.local.*
 
 # Training data
-data/
-*.csv
+data/*
+!data/diabetes.csv
 
 # Trained models
 models/
