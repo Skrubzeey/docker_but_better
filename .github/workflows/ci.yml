@@ -23,6 +23,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Use API secret
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          if [ -n "$API_KEY" ]; then
+            echo "Sekret API_KEY zostal poprawnie przekazany."
+          else
+            echo "Brak sekretu API_KEY."
+            exit 1
+          fi
+
       - name: Cache Python dependencies
         uses: actions/cache@v4
         with:
