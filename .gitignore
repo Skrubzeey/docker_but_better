@@ -221,3 +221,45 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# own modifications
+# Python
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+
+# IDE - PyCharm
+.idea/
+*.iml
+
+# Environment variables and secrets
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+secrets/
+secrets.*
+
+# Local configuration
+config.local.*
+settings.local.*
+
+# Training data
+data/
+*.csv
+
+# Trained models
+models/
+*.pkl
+*.joblib
+*.model
+
+# Logs
+logs/
+
+# Docker
+.docker/
