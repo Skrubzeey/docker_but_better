@@ -21,7 +21,7 @@ def test_split_data_size(sample_df):
     assert len(X_train) == 8
     assert len(X_test) == 2
     assert len(y_train) == 8
-    assert len(y_test) == 2
+    assert len(y_test) == 999
 
 
 def test_split_data_total_size(sample_df):
