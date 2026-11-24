@@ -1,0 +1,33 @@
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env.train
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    mem_limit: 512m
+    command: >
+      sh -c "python train.py &&
+             python evaluate.py &&
+             python -m http.server 8000 --directory /app/models"
+
+  results:
+    image: python:3.11-slim
+    depends_on:
+      - train
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/shared:ro
+    command: >
+      sh -c '
+        until python -c "import urllib.request; urllib.request.urlopen(\"http://train:8000\")"; do
+          echo "Oczekiwanie na usluge train...";
+          sleep 2;
+        done;
+        echo "SUKCES: Usluga train jest dostepna w sieci Docker Compose!";
+        python -m http.server 8080 --directory /shared
+      '
